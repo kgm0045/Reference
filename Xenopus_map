@@ -53,7 +53,7 @@ set -x
   MyID=aubclsc0331
 
 WD=/scratch/$MyID/Xenopus           ## Example:/scratch/$MyID/PracticeRNAseq  
-CD=/scratch/$MyID/Xenopus/CleanData            ## Example:/scratch/$MyID/PracticeRNAseq/CleanData   #   *** This is where the cleaned paired f$
+CD=/scratch/$MyID/FinalProject/CleanData            ## Example:/scratch/$MyID/PracticeRNAseq/CleanData   #   *** This is where the cleaned paired f$
 REFD=/scratch/$MyID/Xenopus/ReferenceGenome          ## Example:/scratch/$MyID/PracticeRNAseq/DaphniaRefGenome    # this directory contains th$
 MAPD=/scratch/$MyID/Xenopus/Map_HiSat2           ## Example:/scratch/$MyID/PracticeRNAseq/Map_HiSat2      #
 COUNTSD=/scratch/$MyID/Xenopus/Counts_StringTie	   ## Example:/scratch/$MyID/PracticeRNAseq/Counts_StringTie
