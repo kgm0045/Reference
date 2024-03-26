@@ -53,7 +53,7 @@ set -x
   MyID=aubclsc0331
 
 WD=/scratch/$MyID/Xenopus           ## Example:/scratch/$MyID/PracticeRNAseq  
-CD=/scratch/$MyID/FinalProject/CleanData            ## Example:/scratch/$MyID/PracticeRNAseq/CleanData   #   *** This is where the cleaned paired f$
+CD=/scratch/aubclsc0331/PracticeRNAseq_Full_Script/CleanData          ## Example:/scratch/$MyID/PracticeRNAseq/CleanData   #   *** This is where the cleaned paired f$
 REFD=/scratch/$MyID/Xenopus/ReferenceGenome          ## Example:/scratch/$MyID/PracticeRNAseq/DaphniaRefGenome    # this directory contains th$
 MAPD=/scratch/$MyID/Xenopus/Map_HiSat2           ## Example:/scratch/$MyID/PracticeRNAseq/Map_HiSat2      #
 COUNTSD=/scratch/$MyID/Xenopus/Counts_StringTie	   ## Example:/scratch/$MyID/PracticeRNAseq/Counts_StringTie
@@ -65,7 +65,6 @@ RESULTSD=/home/$MyID/Xenopus/Counts_H_S_2024      ## Example:/home/aubtss/Practi
 ##  make the directories in SCRATCH for holding the raw data 
 ## -p tells it to make any upper level directories that are not there.
 mkdir -p ${WD}
-mkdir -p ${DD}
 mkdir -p $REFD
 mkdir -p $MAPD
 mkdir -p $COUNTSD
