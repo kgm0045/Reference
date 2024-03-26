@@ -62,6 +62,10 @@ RESULTSD=/home/$MyID/Xenopus/Counts_H_S_2024      ## Example:/home/aubtss/Practi
                ## This is what the "easy name" will be for the genome reference
 
 ## Make the directories and all subdirectories defined by the variables above
+##  make the directories in SCRATCH for holding the raw data 
+## -p tells it to make any upper level directories that are not there.
+mkdir -p ${WD}
+mkdir -p ${DD}
 mkdir -p $REFD
 mkdir -p $MAPD
 mkdir -p $COUNTSD
