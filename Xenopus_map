@@ -52,12 +52,12 @@ set -x
   ## Replace the [#] with paths to define these variable
   MyID=aubclsc0331
 
-WD=/scratch/$MyID/FinalProject           ## Example:/scratch/$MyID/PracticeRNAseq  
-CD=/scratch/$MyID/FinalProject/CleanData            ## Example:/scratch/$MyID/PracticeRNAseq/CleanData   #   *** This is where the cleaned paired f$
-REFD=/scratch/$MyID/FinalProject/ReferenceGenome          ## Example:/scratch/$MyID/PracticeRNAseq/DaphniaRefGenome    # this directory contains th$
-MAPD=/scratch/$MyID/FinalProject/Map_HiSat2           ## Example:/scratch/$MyID/PracticeRNAseq/Map_HiSat2      #
-COUNTSD=/scratch/$MyID/FinalProject/Counts_StringTie	   ## Example:/scratch/$MyID/PracticeRNAseq/Counts_StringTie
-RESULTSD=/home/$MyID/FinalProject/Counts_H_S_2024      ## Example:/home/aubtss/PracticeRNAseq/Counts_H_S
+WD=/scratch/$MyID/Xenopus           ## Example:/scratch/$MyID/PracticeRNAseq  
+CD=/scratch/$MyID/Xenopus/CleanData            ## Example:/scratch/$MyID/PracticeRNAseq/CleanData   #   *** This is where the cleaned paired f$
+REFD=/scratch/$MyID/Xenopus/ReferenceGenome          ## Example:/scratch/$MyID/PracticeRNAseq/DaphniaRefGenome    # this directory contains th$
+MAPD=/scratch/$MyID/Xenopus/Map_HiSat2           ## Example:/scratch/$MyID/PracticeRNAseq/Map_HiSat2      #
+COUNTSD=/scratch/$MyID/Xenopus/Counts_StringTie	   ## Example:/scratch/$MyID/PracticeRNAseq/Counts_StringTie
+RESULTSD=/home/$MyID/Xenopus/Counts_H_S_2024      ## Example:/home/aubtss/PracticeRNAseq/Counts_H_S
 
                ## This is what the "easy name" will be for the genome reference
 
@@ -72,12 +72,12 @@ cd $REFD
 
 
 ###  Identify exons and splice sites on the reference genome
-gffread genome.gff -T -o Paralichthys_olivaceus.gtf              ## gffread converts the annotation file from .gff3 to .gft formate$
-hisat2_extract_splice_sites.py Paralichthys_olivaceus.gtf > Paralichthys_olivaceus.ss
-hisat2_extract_exons.py Paralichthys_olivaceus.gtf> Paralichthys_olivaceus.exon
+gffread Xenopus.gff -T -o Xenopus.gtf              ## gffread converts the annotation file from .gff3 to .gft formate$
+hisat2_extract_splice_sites.py Xenopus.gtf > Xenopus.ss
+hisat2_extract_exons.py Xenopus.gtf> Xenopus.exon
 
 #### Create a HISAT2 index for the reference genome. NOTE every mapping program will need to build a its own index.
-hisat2-build --ss Paralichthys_olivaceus.ss --exon Paralichthys_olivaceus.exon Paralichthys_olivaceus.fasta Paralichthys_index
+hisat2-build --ss Xenopus.ss --exon Xenopus.exon Xenopus.fasta Xenopus_index
 
 ########################  Map and Count the Data using HiSAT2 and StringTie  ########################
 
@@ -100,7 +100,7 @@ do
   ## HiSat2 is the mapping program
   ##  -p indicates number of processors, --dta reports alignments for StringTie --rf is the read orientation
    hisat2 -p 6 --dta --phred33       \
-    -x "${REFD}"/Paralichthys_index	 \
+    -x "${REFD}"/Xenopus_index	 \
     -1 "${CD}"/"$i"_1_paired.fastq  -2 "${CD}"/"$i"_2_paired.fastq	\
     -S "$i".sam
 
@@ -121,7 +121,7 @@ do
   ### eAB options: This will run stringtie once and  ONLY use the Ref annotation for counting readsto genes and exons 
   
 mkdir "${COUNTSD}"/"$i"
-stringtie -p 6 -e -B -G  "${REFD}"/Paralichthys_olivaceus.gtf -o "${COUNTSD}"/"$i"/"$i".gtf -l "$i"   "${MAPD}"/"$i"_sorted.bam
+stringtie -p 6 -e -B -G  "${REFD}"/Xenopus.gtf -o "${COUNTSD}"/"$i"/"$i".gtf -l "$i"   "${MAPD}"/"$i"_sorted.bam
 
 done<list
 
